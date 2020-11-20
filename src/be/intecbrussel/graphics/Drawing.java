@@ -1,8 +1,9 @@
 package be.intecbrussel.graphics;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class Drawing implements Drawable{
+public class Drawing implements Drawable, Iterable{
     private Drawable[] drawableArray;
     private int size;
 
@@ -97,6 +98,32 @@ public class Drawing implements Drawable{
             if (drawable != null) {
                 drawable.scale(s);
             }
+        }
+    }
+
+    @Override
+    public Iterator iterator() {
+        return new DrawableIterator();
+    }
+
+    public class DrawableIterator implements Iterator {
+        private int index = -1;
+
+        @Override
+        public boolean hasNext() {
+            for (int i = index + 1; i < drawableArray.length; i++) {
+                if (drawableArray[i] != null) {
+                    index = i;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        @Override
+        public Object next() {
+            return drawableArray[index];
         }
     }
 }
