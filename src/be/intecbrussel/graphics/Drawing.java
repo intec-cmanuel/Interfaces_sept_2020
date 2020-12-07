@@ -2,8 +2,9 @@ package be.intecbrussel.graphics;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class Drawing implements Drawable, Iterable{
+public class Drawing implements Drawable, Iterable<Drawable>{
     private Drawable[] drawableArray;
     private int size;
 
@@ -107,23 +108,46 @@ public class Drawing implements Drawable, Iterable{
     }
 
     public class DrawableIterator implements Iterator {
-        private int index = -1;
+//        private int index = -1;
+//
+//        @Override
+//        public boolean hasNext() {
+//            for (int i = index + 1; i < drawableArray.length; i++) {
+//                if (drawableArray[i] != null) {
+//                    index = i;
+//                    return true;
+//                }
+//            }
+//
+//            return false;
+//        }
+//
+//        @Override
+//        public Object next() {
+//
+//            return drawableArray[index];
+//        }
 
+        private int index = -1;
         @Override
         public boolean hasNext() {
-            for (int i = index + 1; i < drawableArray.length; i++) {
-                if (drawableArray[i] != null) {
-                    index = i;
+            for (int i = index +1; i < drawableArray.length; i++) {
+                if(drawableArray[i] != null){
                     return true;
                 }
             }
-
             return false;
         }
 
         @Override
-        public Object next() {
-            return drawableArray[index];
+        public Object next() throws NoSuchElementException {
+            for (int i = index+1; i < drawableArray.length; i++) {
+                if(drawableArray[i] != null){
+                    index = i;
+                    return drawableArray[i];
+                }
+            }
+            throw new NoSuchElementException("No figure left in the drawing");
         }
     }
 }

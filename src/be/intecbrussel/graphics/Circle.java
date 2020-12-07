@@ -18,6 +18,9 @@ public class Circle extends Shape{
     }
 
     public void setRadius(int radius) {
+        if (radius < 0){
+            throw new NegativeSizeException();
+        }
         this.radius = radius;
     }
 

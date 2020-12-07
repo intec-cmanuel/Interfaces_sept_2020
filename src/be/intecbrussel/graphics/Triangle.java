@@ -33,6 +33,9 @@ public class Triangle extends Shape{
     }
 
     public void setHeight(int height) {
+        if (height < 0) {
+            throw new NegativeSizeException();
+        }
         this.height = height;
     }
 
@@ -41,6 +44,9 @@ public class Triangle extends Shape{
     }
 
     public void setWidth(int width) {
+        if (width < 0) {
+            throw new NegativeSizeException();
+        }
         this.width = width;
     }
 
@@ -49,6 +55,9 @@ public class Triangle extends Shape{
     }
 
     public void setPerpendicular(int perpendicular) {
+        if (perpendicular < 0) {
+            throw new NegativeSizeException();
+        }
         this.perpendicular = perpendicular;
     }
 

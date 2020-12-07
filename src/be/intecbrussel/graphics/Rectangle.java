@@ -45,11 +45,17 @@ public class Rectangle extends Shape{
     }
 
     public void setHeight(int height){
-        this.height = height < 0 ? -height : height;
+        if (height < 0) {
+            throw new NegativeSizeException();
+        }
+        this.height = height;
     }
 
     public void setWidth(int width){
-        this.width = width < 0 ? -width : width;
+        if (width < 0){
+            throw new NegativeSizeException();
+        }
+        this.width = width;
     }
 
     public void grow(int d){
